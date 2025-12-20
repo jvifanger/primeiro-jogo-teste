@@ -46,3 +46,15 @@ curve = SubResource("Curve2D_7fk0h")
 
 [node name="MovingPlataformLarge4" parent="MovingPlataforms" index="3"]
 curve = SubResource("Curve2D_nlyig")
+
+[node name="EnergyCell" parent="EnergyCells" index="0"]
+position = Vector2(476, -92)
+
+[node name="EnergyCell2" parent="EnergyCells" index="1"]
+position = Vector2(263, -113)
+
+[node name="EnergyCell3" parent="EnergyCells" index="2"]
+position = Vector2(857, -176)
+
+[node name="EnergyCell4" parent="EnergyCells" index="3"]
+position = Vector2(853, -90)

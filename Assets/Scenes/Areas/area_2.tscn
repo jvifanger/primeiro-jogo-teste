@@ -53,3 +53,15 @@ curve = SubResource("Curve2D_nlyig")
 
 [node name="AreaExit" parent="." index="3"]
 position = Vector2(262, -177)
+
+[node name="EnergyCell" parent="EnergyCells" index="0"]
+position = Vector2(304, -176)
+
+[node name="EnergyCell2" parent="EnergyCells" index="1"]
+position = Vector2(136, -142)
+
+[node name="EnergyCell3" parent="EnergyCells" index="2"]
+position = Vector2(56, -46)
+
+[node name="EnergyCell4" parent="EnergyCells" index="3"]
+position = Vector2(-158, -48)
