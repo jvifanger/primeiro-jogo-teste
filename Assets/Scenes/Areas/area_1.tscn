@@ -32,8 +32,8 @@ point_count = 2
 
 [node name="Area1" instance=ExtResource("1_uidp5")]
 
-[node name="Player" parent="." index="1"]
-position = Vector2(-35, -16)
+[node name="PlayerStartPosition" parent="." index="0"]
+position = Vector2(-157, -52)
 
 [node name="MovingPlataformLarge" parent="MovingPlataforms" index="0"]
 curve = SubResource("Curve2D_8wi1m")

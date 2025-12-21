@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cu6g4h5qbrlh7"]
+
+[ext_resource type="PackedScene" uid="uid://nxblgbvnd4yt" path="res://Assets/Scenes/player.tscn" id="1_0ti3t"]
+[ext_resource type="PackedScene" uid="uid://4723g43mtere" path="res://Assets/Scenes/UI/hud.tscn" id="1_6k5g7"]
+
+[node name="Gameplay" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("1_6k5g7")]
+
+[node name="Player" parent="." instance=ExtResource("1_0ti3t")]
+speed = 3.5
+jump_power = 10.0
+
+[node name="Area" type="Node2D" parent="." groups=["area_container"]]
