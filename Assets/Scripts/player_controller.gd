@@ -8,10 +8,6 @@ var speed_multiplier = 30.0
 var jump_multiplier = -30.0
 var direction = 0
 
-#const SPEED = 300.0
-#const JUMP_VELOCITY = -400.0
-
-
 func _input(event):
 	#Jump Event
 	if event.is_action_pressed("jump") and is_on_floor():
