@@ -5,6 +5,7 @@ var current_area = 1
 var area_path = "res://Assets/Scenes/Areas/"
 
 var energy_cells = 0
+var lives = 3
 var area_container : Node2D
 var player : PlayerController
 var hud : HUD
@@ -14,6 +15,12 @@ func _ready():
 	area_container = get_tree().get_first_node_in_group("area_container")
 	player = get_tree().get_first_node_in_group("player")
 	load_area(starting_area)
+
+func decrease_health():
+	lives -= 1
+	print(lives)
+	if (lives == 0):
+		get_tree().reload_current_scene()
 
 func next_area():
 	current_area +=1

@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://4723g43mtere"]
+[gd_scene load_steps=7 format=3 uid="uid://4723g43mtere"]
 
 [ext_resource type="Texture2D" uid="uid://bmwcakyripy3v" path="res://Assets/Sprites/energy_cell.png" id="1_7hthr"]
 [ext_resource type="Script" uid="uid://cpbp5rq8o7x6p" path="res://Assets/Scripts/hud.gd" id="1_w5d3o"]
 [ext_resource type="LabelSettings" uid="uid://b6y6rco83mfqb" path="res://Assets/UI Settings/new_label_settings.tres" id="2_had68"]
 [ext_resource type="Texture2D" uid="uid://c58was4lxacd2" path="res://Assets/Sprites/heart.png" id="4_rfqbw"]
+[ext_resource type="Script" uid="uid://ok5hp3uv7arl" path="res://Assets/Scripts/pause_panel.gd" id="5_4a7rl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfqbw"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 1)
 
 [node name="Hud" type="Control" node_paths=PackedStringArray("energy_cell_label", "portal_label") groups=["hud"]]
 layout_mode = 3
@@ -89,3 +97,64 @@ texture_filter = 1
 layout_mode = 2
 texture = ExtResource("4_rfqbw")
 expand_mode = 2
+
+[node name="Node" type="Node" parent="."]
+
+[node name="PausePanel" type="Panel" parent="Node"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_4a7rl")
+
+[node name="Label" type="Label" parent="Node/PausePanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.0
+offset_top = 128.0
+offset_right = 192.0
+offset_bottom = 192.0
+grow_horizontal = 2
+text = "GAME PAUSED"
+label_settings = ExtResource("2_had68")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node/PausePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.59094
+offset_top = -40.0
+offset_right = 202.59094
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="ResumeButton" type="Button" parent="Node/PausePanel/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_rfqbw")
+text = "Resume
+"
+
+[node name="MenuButton" type="Button" parent="Node/PausePanel/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBoxFlat_rfqbw")
+text = "Go to main menu"
+
+[connection signal="pressed" from="Node/PausePanel/VBoxContainer/ResumeButton" to="Node/PausePanel" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Node/PausePanel/VBoxContainer/MenuButton" to="Node/PausePanel" method="_on_menu_button_pressed"]
