@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bbl3mt4s1tlwc"]
+[gd_scene load_steps=12 format=3 uid="uid://bbl3mt4s1tlwc"]
 
 [ext_resource type="Texture2D" uid="uid://ntb0befljsre" path="res://Assets/Sprites/tiles_1.png" id="1_uidp5"]
 [ext_resource type="PackedScene" uid="uid://bigimkpnxlbx0" path="res://Assets/Scenes/moving_plataform_large.tscn" id="2_8wi1m"]
 [ext_resource type="PackedScene" uid="uid://b5lr6d8yya1aj" path="res://Assets/Scenes/Area functionality/area_exit.tscn" id="4_f32ql"]
 [ext_resource type="PackedScene" uid="uid://bsuvpw4yx077g" path="res://Assets/Scenes/energy_cell.tscn" id="5_d6mib"]
+[ext_resource type="PackedScene" uid="uid://cil8igaiec4rl" path="res://Assets/Scenes/enemy.tscn" id="5_n3vpm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3uyhe"]
 texture = ExtResource("1_uidp5")
@@ -320,7 +321,9 @@ texture = ExtResource("1_uidp5")
 
 [sub_resource type="TileSet" id="TileSet_8wi1m"]
 physics_layer_0/collision_layer = 256
+physics_layer_0/collision_mask = 3
 physics_layer_1/collision_layer = 512
+physics_layer_1/collision_mask = 3
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "one_wat_ground"
 terrain_set_0/terrain_0/color = Color(0.21312857, 0.35050884, 0.13460729, 1)
@@ -402,3 +405,6 @@ position = Vector2(1868, -289)
 
 [node name="EnergyCell4" parent="EnergyCells" instance=ExtResource("5_d6mib")]
 position = Vector2(1882, -289)
+
+[node name="Enemy" parent="." instance=ExtResource("5_n3vpm")]
+position = Vector2(15, -11)

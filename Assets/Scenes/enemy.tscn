@@ -1,0 +1,145 @@
+[gd_scene load_steps=12 format=3 uid="uid://cil8igaiec4rl"]
+
+[ext_resource type="Script" uid="uid://cb5j6k40h8wou" path="res://Assets/Scripts/enemy_controller.gd" id="1_2g0jp"]
+[ext_resource type="Texture2D" uid="uid://b28vfmiussnvf" path="res://Assets/Sprites/enemy_1.png" id="1_atlr2"]
+[ext_resource type="Script" uid="uid://bhf431mfo60v" path="res://Assets/Scripts/enemy_animator.gd" id="1_e2b7p"]
+
+[sub_resource type="Animation" id="Animation_e2b7p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy/EnemyAnimation/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(-1.385, 0, 16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_4870b"]
+resource_name = "fall"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy/EnemyAnimation/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(-1.385, 48, 16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_atlr2"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy/EnemyAnimation/Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(-1.385, 0, 16, 16), Rect2(14.615, 0, 16, 16), Rect2(30.615, 0, 16, 16), Rect2(46.615, 0, 16, 16), Rect2(62.615, 0, 16, 16), Rect2(78.615, 0, 16, 16), Rect2(94.615, 0, 16, 16), Rect2(94.615, 0, 16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_4ye20"]
+resource_name = "jump"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy/EnemyAnimation/Sprite2D:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(-1.385, 32, 16, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_2g0jp"]
+resource_name = "move"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Enemy/EnemyAnimation/Sprite2D:region_rect")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(-1.385, 16, 16, 16), Rect2(14.615, 16, 16, 16), Rect2(30.615, 16, 16, 16), Rect2(46.615, 16, 16, 16), Rect2(46.615, 16, 16, 16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2g0jp"]
+_data = {
+&"RESET": SubResource("Animation_e2b7p"),
+&"fall": SubResource("Animation_4870b"),
+&"idle": SubResource("Animation_atlr2"),
+&"jump": SubResource("Animation_4ye20"),
+&"move": SubResource("Animation_2g0jp")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2g0jp"]
+size = Vector2(10, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ye20"]
+size = Vector2(12, 15)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 769
+script = ExtResource("1_2g0jp")
+speed = 2.0
+metadata/_custom_type_script = "uid://cft4trw34v3gu"
+
+[node name="EnemyAnimation" type="Node2D" parent="." node_paths=PackedStringArray("enemy_controller", "animation_player", "sprite")]
+script = ExtResource("1_e2b7p")
+enemy_controller = NodePath("..")
+animation_player = NodePath("AnimationPlayer")
+sprite = NodePath("Sprite2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EnemyAnimation"]
+root_node = NodePath("../../..")
+libraries = {
+&"": SubResource("AnimationLibrary_2g0jp")
+}
+autoplay = "idle"
+speed_scale = 1.5
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyAnimation"]
+texture = ExtResource("1_atlr2")
+region_enabled = true
+region_rect = Rect2(-1.385, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_2g0jp")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(10, -13)
+target_position = Vector2(0, 27)
+collision_mask = 768
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_4ye20")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
